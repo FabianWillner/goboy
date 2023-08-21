@@ -1,25 +1,35 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/FabianWillner/goboy/cpu"
-	"github.com/FabianWillner/goboy/utils"
 )
 
 
 
 func main() {
-	val := byte(0xFF)
 	cpu := cpu.New()
-	utils.PrintRegisters(cpu)
+	cpu.Register.A = 0xF0
 
-	cpu.Register.A = val
-	cpu.Register.E = val
+	cpu.PrintRegisters()
 
-	utils.PrintRegisters(cpu)
+	err := cpu.Execute(0x87)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
+	cpu.PrintRegisters()
+
+	err = cpu.Execute(0x88)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	cpu.Register.SetF(0b10100000)
 
-	utils.PrintRegisters(cpu)
+	cpu.PrintRegisters()
 	// fmt.Println("Hello, World!")
 	// rom_filepath := "./testroms/cpu_instrs.gb"
 	// file, err := os.Open(rom_filepath)
