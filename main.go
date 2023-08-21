@@ -9,17 +9,17 @@ import (
 
 func main() {
 	val := byte(0xFF)
-	gba_cpu := cpu.New()
-	utils.PrintRegisters(gba_cpu)
+	cpu := cpu.New()
+	utils.PrintRegisters(cpu)
 
-	gba_cpu.A = val
-	gba_cpu.E = val
+	cpu.Register.A = val
+	cpu.Register.E = val
 
-	utils.PrintRegisters(gba_cpu)
+	utils.PrintRegisters(cpu)
 
-	gba_cpu.SetF(0b10100000)
+	cpu.Register.SetF(0b10100000)
 
-	utils.PrintRegisters(gba_cpu)
+	utils.PrintRegisters(cpu)
 	// fmt.Println("Hello, World!")
 	// rom_filepath := "./testroms/cpu_instrs.gb"
 	// file, err := os.Open(rom_filepath)
