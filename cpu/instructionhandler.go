@@ -23,6 +23,7 @@ func (c *CPU) handleInstruction(inst instruction.Instruction) error {
 		val, f := add(target1, target2)
 		c.SetReg(inst.Target1, val)
 		c.Register.SetF(f)
+		c.PC += 1
 
 	default:
 		return errors.New(fmt.Sprintf("Not implemented 0x%02X, Instruction: %x\n", inst.Opcode, inst.Inst))
@@ -40,4 +41,10 @@ func add(a byte, b byte) (byte, byte){
 	flag.Zero = result == 0
 	flag.Half_carry = (a & 0xF) + (b & 0xF) > 0xF;
 	return result, flag.GetF()
+}
+
+func inc(a byte) (byte, byte) {
+	// flag := Flags{}
+	// result := byte(a + 1)
+
 }
